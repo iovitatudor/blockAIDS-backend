@@ -1,5 +1,3 @@
-import { ApiProperty, PartialType } from "@nestjs/swagger";
-import { CreateSpecialistDto } from "./create-specialist.dto";
 import {
   IsEmail,
   IsNotEmpty,
@@ -9,6 +7,9 @@ import {
   MinLength,
   ValidateIf,
 } from "class-validator";
+import { ApiProperty, PartialType } from "@nestjs/swagger";
+import { CreateSpecialistDto } from "./create-specialist.dto";
+
 
 const passwordRegEx =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;

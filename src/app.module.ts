@@ -11,6 +11,8 @@ import { OrganizationsModule } from "./modules/organizations/organizations.modul
 import { Organization } from "./modules/organizations/entities/organization.entity";
 import { SpecialistsModule } from "./modules/specialists/specialists.module";
 import { Specialist } from "./modules/specialists/entities/specialist.entity";
+import { NotificationsModule } from "./modules/notifications/notifications.module";
+import { Notification } from "./modules/notifications/entities/notification.entity";
 
 @Module({
   imports: [
@@ -24,7 +26,7 @@ import { Specialist } from "./modules/specialists/entities/specialist.entity";
       port: Number(process.env.DB_PORT),
       password: process.env.DB_PASSWORD,
       username: process.env.DB_USERNAME,
-      entities: [User, Organization, Specialist],
+      entities: [User, Organization, Specialist, Notification],
       database: process.env.DB_DATABASE,
       synchronize: true,
       logging: true,
@@ -36,6 +38,7 @@ import { Specialist } from "./modules/specialists/entities/specialist.entity";
     UsersModule,
     OrganizationsModule,
     SpecialistsModule,
+    NotificationsModule,
   ],
   controllers: [],
   providers: [],
