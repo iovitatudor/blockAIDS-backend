@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Specialist } from "../../specialists/entities/specialist.entity";
 
 @Entity()
 export class Organization {
@@ -8,6 +9,9 @@ export class Organization {
 
   @Column({ type: "varchar", length: 30 })
   name: string;
+
+  @OneToMany(() => Specialist, (specialist) => specialist.organization)
+  specialists: Specialist[];
 
   @CreateDateColumn({
     type: "timestamp",

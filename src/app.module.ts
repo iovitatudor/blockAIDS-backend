@@ -9,6 +9,8 @@ import * as path from "path";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { OrganizationsModule } from "./modules/organizations/organizations.module";
 import { Organization } from "./modules/organizations/entities/organization.entity";
+import { SpecialistsModule } from "./modules/specialists/specialists.module";
+import { Specialist } from "./modules/specialists/entities/specialist.entity";
 
 @Module({
   imports: [
@@ -22,7 +24,7 @@ import { Organization } from "./modules/organizations/entities/organization.enti
       port: Number(process.env.DB_PORT),
       password: process.env.DB_PASSWORD,
       username: process.env.DB_USERNAME,
-      entities: [User, Organization],
+      entities: [User, Organization, Specialist],
       database: process.env.DB_DATABASE,
       synchronize: true,
       logging: true,
@@ -33,11 +35,9 @@ import { Organization } from "./modules/organizations/entities/organization.enti
     FilesModule,
     UsersModule,
     OrganizationsModule,
+    SpecialistsModule,
   ],
   controllers: [],
   providers: [],
 })
-
-
-export class AppModule {
-}
+export class AppModule {}
