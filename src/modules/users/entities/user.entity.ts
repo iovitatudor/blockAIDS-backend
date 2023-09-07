@@ -22,15 +22,26 @@ export class User {
   @Column({ type: "varchar" })
   password: string;
 
-  @Column({ type: "enum", enum: [...Object.values(UserGenderEnum)], default: UserGenderEnum.male })
+  @Column({
+    type: "enum",
+    enum: [...Object.values(UserGenderEnum)],
+    default: UserGenderEnum.male,
+  })
   gender: string;
 
   @Column({ type: "varchar", length: 255, default: "avatar-mock.png" })
   avatar: string;
 
-  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  @CreateDateColumn({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP(6)",
+  })
   public created_at: Date;
 
-  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  @UpdateDateColumn({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP(6)",
+    onUpdate: "CURRENT_TIMESTAMP(6)",
+  })
   public updated_at: Date;
 }
