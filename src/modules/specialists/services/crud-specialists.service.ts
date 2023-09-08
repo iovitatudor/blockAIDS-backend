@@ -11,7 +11,7 @@ import * as bcrypt from "bcryptjs";
 export class CrudSpecialistsService {
   constructor(
     @InjectRepository(Specialist)
-    private readonly SpecialistRepository: Repository<Specialist>,
+    private readonly specialistRepository: Repository<Specialist>,
     private readonly fileService: FilesService,
   ) {
   }
@@ -30,20 +30,20 @@ export class CrudSpecialistsService {
           5,
         );
       }
-      return await this.SpecialistRepository.save({ ...createSpecialistDto });
+      return await this.specialistRepository.save({ ...createSpecialistDto });
     } catch (e) {
       throw new HttpException(e.detail, HttpStatus.UNPROCESSABLE_ENTITY);
     }
   }
 
   findAll(): Promise<Specialist[]> {
-    return this.SpecialistRepository.find({
+    return this.specialistRepository.find({
       relations: { organization: true },
     });
   }
 
   findByOrganizationId(id: string): Promise<Specialist[]> {
-    return this.SpecialistRepository.find({
+    return this.specialistRepository.find({
       where: { organizationId: id },
       relations: { organization: true },
     });
@@ -51,7 +51,7 @@ export class CrudSpecialistsService {
 
   async findOne(id: number): Promise<Specialist> {
     try {
-      return await this.SpecialistRepository.findOneOrFail({
+      return await this.specialistRepository.findOneOrFail({
         where: { id },
         relations: { organization: true },
       });
@@ -78,7 +78,7 @@ export class CrudSpecialistsService {
           5,
         );
       }
-      return await this.SpecialistRepository.update(id, updateSpecialistDto);
+      return await this.specialistRepository.update(id, updateSpecialistDto);
     } catch (e) {
       throw new HttpException(e.detail, HttpStatus.UNPROCESSABLE_ENTITY);
     }
@@ -86,7 +86,7 @@ export class CrudSpecialistsService {
 
   remove(id: number): Promise<{ affected?: number }> {
     try {
-      return this.SpecialistRepository.delete(id);
+      return this.specialistRepository.delete(id);
     } catch (e) {
       throw new HttpException(e.detail, HttpStatus.UNPROCESSABLE_ENTITY);
     }

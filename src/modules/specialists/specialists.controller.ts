@@ -37,25 +37,25 @@ export class SpecialistsController {
   @ApiOperation({ summary: "Get all specialists" })
   @Get()
   async findAll() {
-    const Specialists = await this.crudSpecialistsService.findAll();
-    return SpecialistsResource.collect(Specialists);
+    const specialists = await this.crudSpecialistsService.findAll();
+    return SpecialistsResource.collect(specialists);
   }
 
   @ApiResponse({ status: 200, type: [SpecialistsResource] })
   @ApiOperation({ summary: "Get specialists by organization id" })
   @Get("/organization/:id")
   async findByOrganizationId(@Param("id") id: string) {
-    const Specialists =
+    const specialists =
       await this.crudSpecialistsService.findByOrganizationId(id);
-    return SpecialistsResource.collect(Specialists);
+    return SpecialistsResource.collect(specialists);
   }
 
   @ApiResponse({ status: 200, type: SpecialistsResource })
   @ApiOperation({ summary: "Get specialist by id" })
   @Get(":id")
   async findOne(@Param("id") id: string) {
-    const user = await this.crudSpecialistsService.findOne(+id);
-    return new SpecialistsResource(user);
+    const specialist = await this.crudSpecialistsService.findOne(+id);
+    return new SpecialistsResource(specialist);
   }
 
   @ApiConsumes("multipart/form-data")
