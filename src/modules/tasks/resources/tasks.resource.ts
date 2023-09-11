@@ -31,6 +31,8 @@ export class TasksResource {
   public notification: NotificationsResource;
   @ApiProperty({ example: OrganizationResource })
   public organization: OrganizationResource;
+  @ApiProperty({ example: 2 })
+  public specialistId: number;
 
   public constructor(task) {
     this.id = task.id;
@@ -50,6 +52,7 @@ export class TasksResource {
     this.organization = task.organization
       ? new OrganizationResource(task.organization)
       : null;
+    this.specialistId = task.specialistId;
   }
 
   public static collect(tasks): TasksResource[] {

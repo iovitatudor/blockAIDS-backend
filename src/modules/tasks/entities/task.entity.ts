@@ -1,62 +1,59 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { CreateDateColumn, UpdateDateColumn } from "typeorm";
-import { User } from "../../users/entities/user.entity";
-import { Specialist } from "../../specialists/entities/specialist.entity";
-import { TaskType } from "./task-type.entity";
-import { Organization } from "../../organizations/entities/organization.entity";
-import { Notification } from "../../notifications/entities/notification.entity";
-import { TaskStatusEnum } from "../enums/task-status.enum";
+import {CreateDateColumn, UpdateDateColumn} from "typeorm";
+import {User} from "../../users/entities/user.entity";
+import {Specialist} from "../../specialists/entities/specialist.entity";
+import {TaskType} from "./task-type.entity";
+import {Organization} from "../../organizations/entities/organization.entity";
+import {Notification} from "../../notifications/entities/notification.entity";
+import {TaskStatusEnum} from "../enums/task-status.enum";
 
 @Entity()
 export class Task {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "uuid" })
+  @Column({type: "uuid"})
   userId: string;
 
-  @OneToMany(() => User, (user) => user.id)
-  @JoinTable()
+  @ManyToOne(() => User)
   user: User;
 
-  @Column({ type: "uuid" })
+  @Column({type: "uuid"})
   specialistId: string;
 
-  @OneToMany(() => Specialist, (specialist) => specialist.id)
-  @JoinTable()
+  @ManyToOne(() => Specialist)
   specialist: Specialist;
 
   @Column({ type: "uuid" })
   taskTypeId: string;
 
-  @OneToMany(() => TaskType, (taskType) => taskType.id)
-  @JoinTable()
+  @ManyToOne(() => TaskType)
   taskType: TaskType;
-
-  @OneToMany(() => Organization, (organization) => organization.id)
-  @JoinTable()
-  organization: Organization;
 
   @Column({ type: "uuid" })
   organizationId: string;
 
+  @ManyToOne(() => Organization)
+  organization: Organization;
+
   @Column({ type: "uuid" })
   notificationId: string;
 
-  @OneToMany(() => Notification, (notification) => notification.id)
-  @JoinTable()
+  @ManyToOne(() => Notification)
   notification: Notification;
 
-  @Column({ type: "varchar", length: 30 })
+  @Column({type: "varchar", length: 30})
   name: string;
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  @Column({type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)"})
   due_date: Date;
 
   @Column({
@@ -66,10 +63,10 @@ export class Task {
   })
   status: TaskStatusEnum;
 
-  @Column({ type: "int", nullable: true })
+  @Column({type: "int", nullable: true})
   points: number;
 
-  @Column({ type: "text", nullable: true })
+  @Column({type: "text", nullable: true})
   description: string;
 
   @CreateDateColumn({

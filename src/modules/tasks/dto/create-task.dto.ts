@@ -11,30 +11,28 @@ import { TaskStatusEnum } from "../enums/task-status.enum";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateTaskDto {
-  @ApiProperty({ example: 1 })
-  @IsString()
+  @ApiProperty({ example: '1' })
   @IsNotEmpty()
-  userId: number;
+  userId: string;
 
-  @ApiProperty({ example: 1 })
-  @IsString()
+  @ApiProperty({ example: "1" })
   @IsNotEmpty()
-  specialistId: number;
+  specialistId: string;
 
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: '1' })
   @IsString()
   @IsNotEmpty()
-  taskTypeId: number;
+  taskTypeId: string;
 
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: '1' })
   @IsString()
   @IsNotEmpty()
-  organizationId: number;
+  organizationId: string;
 
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: '1' })
   @IsString()
   @IsNotEmpty()
-  notificationId: number;
+  notificationId: string;
 
   @ApiProperty({ example: "My first task" })
   @IsString()

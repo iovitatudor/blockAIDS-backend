@@ -12,31 +12,31 @@ import { CreateTaskDto } from "./create-task.dto";
 import { TaskStatusEnum } from "../enums/task-status.enum";
 
 export class UpdateTaskDto extends PartialType(CreateTaskDto) {
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: '1' })
   @ValidateIf((o) => "userId" in o)
   @IsString()
   @IsNotEmpty()
   userId: string;
 
   @ValidateIf((o) => "specialistId" in o)
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: '1' })
   @IsString()
   @IsNotEmpty()
   specialistId: string;
 
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: '1' })
   @ValidateIf((o) => "taskTypeId" in o)
   @IsString()
   @IsNotEmpty()
   taskTypeId: string;
 
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: '1' })
   @ValidateIf((o) => "organizationId" in o)
   @IsString()
   @IsNotEmpty()
   organizationId: string;
 
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: '1' })
   @ValidateIf((o) => "notificationId" in o)
   @IsString()
   @IsNotEmpty()
