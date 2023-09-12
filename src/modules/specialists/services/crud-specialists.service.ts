@@ -63,6 +63,20 @@ export class CrudSpecialistsService {
     }
   }
 
+  async findByEmail(email: string): Promise<Specialist> {
+    try {
+      return await this.specialistRepository.findOneOrFail({
+        where: { email },
+        relations: { organization: true },
+      });
+    } catch (e) {
+      throw new HttpException(
+        "Could not find any specialist.",
+        HttpStatus.NOT_FOUND,
+      );
+    }
+  }
+
   async update(
     id: number,
     updateSpecialistDto: UpdateSpecialistDto,

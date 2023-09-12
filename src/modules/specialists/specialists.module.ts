@@ -15,6 +15,7 @@ import { Organization } from "../organizations/entities/organization.entity";
     ValidationSpecialistsService,
     FilesService,
   ],
+  exports: [CrudSpecialistsService, ValidationSpecialistsService],
 })
 export class SpecialistsModule {
 }

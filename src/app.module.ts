@@ -16,6 +16,7 @@ import { Notification } from "./modules/notifications/entities/notification.enti
 import { TasksModule } from "./modules/tasks/tasks.module";
 import { TaskType } from "./modules/tasks/entities/task-type.entity";
 import { Task } from "./modules/tasks/entities/task.entity";
+import { AuthModule } from "./modules/auth/auth.module";
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { Task } from "./modules/tasks/entities/task.entity";
     SpecialistsModule,
     NotificationsModule,
     TasksModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

@@ -12,8 +12,7 @@ export class CrudUsersService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly fileService: FilesService,
-  ) {
-  }
+  ) {}
 
   async createUser(createUserDto: CreateUserDto, avatar): Promise<User> {
     if (avatar) {
@@ -32,6 +31,14 @@ export class CrudUsersService {
   async findUser(id: number): Promise<User> {
     try {
       return await this.userRepository.findOneOrFail({ where: { id } });
+    } catch (e) {
+      throw new HttpException("Could not find any user.", HttpStatus.NOT_FOUND);
+    }
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    try {
+      return await this.userRepository.findOneOrFail({ where: { email } });
     } catch (e) {
       throw new HttpException("Could not find any user.", HttpStatus.NOT_FOUND);
     }

@@ -10,6 +10,7 @@ import { ValidationUsersService } from "./services/validation-users.service";
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
   providers: [CrudUsersService, ValidationUsersService, FilesService],
+  exports: [CrudUsersService, ValidationUsersService],
 })
 export class UsersModule {
 }

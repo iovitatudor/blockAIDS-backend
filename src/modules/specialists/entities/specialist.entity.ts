@@ -17,7 +17,7 @@ export class Specialist {
   @Column({ type: "varchar", length: 30 })
   name: string;
 
-  @Column({ type: "varchar", length: 100 })
+  @Column({ type: "varchar", length: 100, nullable: true })
   job_position: string;
 
   @Column({ type: "varchar", length: 40 })
