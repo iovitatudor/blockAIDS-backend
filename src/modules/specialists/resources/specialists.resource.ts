@@ -11,7 +11,7 @@ export class SpecialistsResource {
   @ApiProperty({ example: "johny@gmail.com" })
   public email: string;
   @ApiProperty({ example: "Neurologist" })
-  public job_position: string;
+  public jobPosition: string;
   @ApiProperty({ example: "johny-avatar.png" })
   public avatar: string;
   @ApiProperty({ example: OrganizationResource })
@@ -21,7 +21,7 @@ export class SpecialistsResource {
     this.id = specialist.id;
     this.name = specialist.name;
     this.email = specialist.email;
-    this.job_position = specialist.jobPosition;
+    this.jobPosition = specialist.job_position;
     this.avatar = specialist.avatar;
     this.organization = specialist.organization
       ? new OrganizationResource(specialist.organization)

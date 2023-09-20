@@ -9,7 +9,7 @@ export class TaskType {
   @Column({ type: "varchar", length: 30 })
   name: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   description: string;
 
   @Column({ type: "varchar", length: 255 })

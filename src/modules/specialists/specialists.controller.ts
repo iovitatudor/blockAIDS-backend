@@ -25,7 +25,7 @@ import { UpdateSpecialistDto } from "./dto/update-specialist.dto";
 import { SpecialistsResource } from "./resources/specialists.resource";
 
 @ApiTags("Specialists")
-@Controller("specialists")
+@Controller("api/specialists")
 export class SpecialistsController {
   constructor(
     private readonly crudSpecialistsService: CrudSpecialistsService,

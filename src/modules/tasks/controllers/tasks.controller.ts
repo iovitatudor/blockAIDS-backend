@@ -20,7 +20,7 @@ import { CreateTaskDto } from "../dto/create-task.dto";
 import { UpdateTaskDto } from "../dto/update-task.dto";
 
 @ApiTags("Task")
-@Controller("tasks")
+@Controller("api/tasks")
 export class TasksController {
   constructor(private readonly crudTasksService: CrudTasksService) {
   }

@@ -9,8 +9,6 @@ export class CreateTaskTypeDto {
   name: string;
 
   @ApiProperty({ example: "Take semi-annual test..." })
-  @IsNotEmpty()
-  @IsString()
   description: string;
 
   @ApiProperty({ example: "1" })

@@ -20,7 +20,7 @@ import { CreateTaskTypeDto } from "../dto/create-task-type.dto";
 import { UpdateTaskTypeDto } from "../dto/update-task-type.dto";
 
 @ApiTags("Task Types")
-@Controller("task-types")
+@Controller("api/task-types")
 export class TaskTypeController {
   constructor(private readonly crudTaskTypesService: CrudTaskTypesService) {
   }

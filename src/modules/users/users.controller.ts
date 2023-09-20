@@ -25,7 +25,7 @@ import { UsersResource } from "./resources/users.resource";
 import { ValidationUsersService } from "./services/validation-users.service";
 
 @ApiTags("Users")
-@Controller("users")
+@Controller("api/users")
 export class UsersController {
   constructor(
     private readonly crudUsersService: CrudUsersService,
