@@ -12,7 +12,8 @@ export class CrudUsersService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly fileService: FilesService,
-  ) {}
+  ) {
+  }
 
   async createUser(createUserDto: CreateUserDto, avatar): Promise<User> {
     if (avatar) {
@@ -25,7 +26,11 @@ export class CrudUsersService {
   }
 
   findAllUser(): Promise<User[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      order: {
+        id: "DESC",
+      },
+    });
   }
 
   async findUser(id: number): Promise<User> {

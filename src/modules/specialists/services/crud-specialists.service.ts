@@ -39,6 +39,7 @@ export class CrudSpecialistsService {
   findAll(): Promise<Specialist[]> {
     return this.specialistRepository.find({
       relations: { organization: true },
+      order: { id: "DESC" },
     });
   }
 

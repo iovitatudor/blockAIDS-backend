@@ -20,7 +20,11 @@ export class CrudOrganizationsService {
   }
 
   findAllOrganization(): Promise<Organization[]> {
-    return this.organizationRepository.find();
+    return this.organizationRepository.find({
+      order: {
+        id: "DESC",
+      },
+    });
   }
 
   async findOrganization(id: number): Promise<Organization> {
