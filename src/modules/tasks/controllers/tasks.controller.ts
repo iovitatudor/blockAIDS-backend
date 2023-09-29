@@ -26,10 +26,26 @@ export class TasksController {
   }
 
   @ApiResponse({ status: 200, type: [TasksResource] })
-  @ApiOperation({ summary: "Get all task" })
+  @ApiOperation({ summary: "Get all tasks" })
   @Get()
   async findAll() {
     const task = await this.crudTasksService.findAll();
+    return TasksResource.collect(task);
+  }
+
+  @ApiResponse({ status: 200, type: [TasksResource] })
+  @ApiOperation({ summary: "Get all tasks by specialist id" })
+  @Get("/specialist/:id")
+  async findAllBySpecialist(@Param("id") id: string) {
+    const task = await this.crudTasksService.findAllBySpecialistId(id);
+    return TasksResource.collect(task);
+  }
+
+  @ApiResponse({ status: 200, type: [TasksResource] })
+  @ApiOperation({ summary: "Get all tasks by user id" })
+  @Get("/user/:id")
+  async findAllByUser(@Param("id") id: string) {
+    const task = await this.crudTasksService.findAllByUserId(id);
     return TasksResource.collect(task);
   }
 

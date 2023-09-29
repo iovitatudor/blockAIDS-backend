@@ -11,6 +11,8 @@ import { JwtService } from "@nestjs/jwt";
 import { LoginAuthDto } from "./dto/login-auth.dto";
 import { ValidationSpecialistsService } from "../specialists/services/validation-specialists.service";
 import { ValidationUsersService } from "../users/services/validation-users.service";
+import { SpecialistsResource } from "../specialists/resources/specialists.resource";
+import { UsersResource } from "../users/resources/users.resource";
 
 @Injectable()
 export class AuthService {
@@ -20,18 +22,21 @@ export class AuthService {
     private readonly validationUsersService: ValidationUsersService,
     private readonly crudSpecialistsService: CrudSpecialistsService,
     private readonly validationSpecialistsService: ValidationSpecialistsService,
-  ) {}
+  ) {
+  }
 
   async login(loginAuthDto: LoginAuthDto) {
     if (loginAuthDto.type === AuthTypeEnum.specialist) {
       const specialist = await this.checkSpecialist(loginAuthDto);
       const token = this.generateToken(specialist, loginAuthDto.type);
-      return { token, specialistId: specialist.id };
+      const specialistResource = new SpecialistsResource(specialist);
+      return { token, type: "specialist", specialist: specialistResource };
     }
     if (loginAuthDto.type === AuthTypeEnum.user) {
       const user = await this.checkUser(loginAuthDto);
       const token = this.generateToken(user, loginAuthDto.type);
-      return { token, userId: user.id };
+      const userResource = new UsersResource(user);
+      return { token, type: "user", user: userResource };
     }
     throw new UnauthorizedException({
       message: "Login type filed.",
@@ -50,12 +55,13 @@ export class AuthService {
           ...registerAuthDto,
           avatar: "avatar-mock.png",
           job_position: null,
-          organizationId: "1",
+          organizationId: registerAuthDto.organizationId,
         },
         null,
       );
       token = this.generateToken(specialist, registerAuthDto.type);
-      return { token, specialistId: specialist.id };
+      const specialistResource = new SpecialistsResource(specialist);
+      return { token, type: "specialist", specialist: specialistResource };
     }
     if (registerAuthDto.type === AuthTypeEnum.user) {
       await this.validationUsersService.validateEmail(registerAuthDto.email);
@@ -71,8 +77,9 @@ export class AuthService {
         },
         null,
       );
-      token = await this.generateToken(user, registerAuthDto.type);
-      return { token, userId: user.id };
+      token = this.generateToken(user, registerAuthDto.type);
+      const userResource = new UsersResource(user);
+      return { token, type: "user", user: userResource };
     }
 
     throw new UnauthorizedException({

@@ -14,7 +14,7 @@ export class TasksResource {
   @ApiProperty({ example: "My first task" })
   public name: string;
   @ApiProperty({ example: "2023-07-10" })
-  public dateDue: Date;
+  public dateDue: string;
   @ApiProperty({ example: TaskStatusEnum.InProgress })
   public status: TaskStatusEnum;
   @ApiProperty({ example: 342 })
@@ -37,7 +37,7 @@ export class TasksResource {
   public constructor(task) {
     this.id = task.id;
     this.name = task.name;
-    this.dateDue = task.dateDue;
+    this.dateDue = task.due_date;
     this.status = task.status;
     this.points = task.points;
     this.description = task.description;

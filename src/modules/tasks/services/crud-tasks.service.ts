@@ -1,9 +1,9 @@
-import {HttpException, HttpStatus, Injectable} from "@nestjs/common";
-import {InjectRepository} from "@nestjs/typeorm";
-import {Repository, UpdateResult} from "typeorm";
-import {CreateTaskDto} from "../dto/create-task.dto";
-import {UpdateTaskDto} from "../dto/update-task.dto";
-import {Task} from "../entities/task.entity";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, UpdateResult } from "typeorm";
+import { CreateTaskDto } from "../dto/create-task.dto";
+import { UpdateTaskDto } from "../dto/update-task.dto";
+import { Task } from "../entities/task.entity";
 
 @Injectable()
 export class CrudTasksService {
@@ -26,6 +26,35 @@ export class CrudTasksService {
 
   findAll(): Promise<Task[]> {
     return this.taskRepository.find({
+      order: { id: "DESC" },
+      relations: {
+        specialist: true,
+        user: true,
+        organization: true,
+        notification: true,
+        taskType: true,
+      },
+    });
+  }
+
+  findAllBySpecialistId(id: string): Promise<Task[]> {
+    return this.taskRepository.find({
+      where: { specialistId: id.toString() },
+      order: { id: "DESC" },
+      relations: {
+        specialist: true,
+        user: true,
+        organization: true,
+        notification: true,
+        taskType: true,
+      },
+    });
+  }
+
+  findAllByUserId(id: string): Promise<Task[]> {
+    return this.taskRepository.find({
+      where: { userId: id.toString() },
+      order: { id: "DESC" },
       relations: {
         specialist: true,
         user: true,
@@ -39,7 +68,7 @@ export class CrudTasksService {
   async findOne(id: number): Promise<Task> {
     try {
       return await this.taskRepository.findOneOrFail({
-        where: {id},
+        where: { id },
         relations: {
           specialist: true,
           user: true,

@@ -11,7 +11,7 @@ import { RegisterAuthDto } from "./dto/register-auth.dto";
 import { LoginAuthDto } from "./dto/login-auth.dto";
 
 @ApiTags("Auth")
-@Controller("auth")
+@Controller("api/auth")
 export class AuthController {
   constructor(private authService: AuthService) {}
 
@@ -19,7 +19,7 @@ export class AuthController {
   @ApiResponse({ status: 200, description: "Application Token" })
   @UsePipes(ValidationPipe)
   @Post("/register")
-  public async register(@Body() registerAuthDto: RegisterAuthDto): Promise<object> {
+  public async register(@Body() registerAuthDto: RegisterAuthDto) {
     return await this.authService.register(registerAuthDto);
   }
 
