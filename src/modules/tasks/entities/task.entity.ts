@@ -1,32 +1,29 @@
 import {
   Column,
   Entity,
-  JoinColumn,
-  JoinTable,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import {CreateDateColumn, UpdateDateColumn} from "typeorm";
-import {User} from "../../users/entities/user.entity";
-import {Specialist} from "../../specialists/entities/specialist.entity";
-import {TaskType} from "./task-type.entity";
-import {Organization} from "../../organizations/entities/organization.entity";
-import {Notification} from "../../notifications/entities/notification.entity";
-import {TaskStatusEnum} from "../enums/task-status.enum";
+import { CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { User } from "../../users/entities/user.entity";
+import { Specialist } from "../../specialists/entities/specialist.entity";
+import { TaskType } from "./task-type.entity";
+import { Organization } from "../../organizations/entities/organization.entity";
+import { Notification } from "../../notifications/entities/notification.entity";
+import { TaskStatusEnum } from "../enums/task-status.enum";
 
 @Entity()
 export class Task {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({type: "uuid"})
+  @Column({ type: "uuid" })
   userId: string;
 
   @ManyToOne(() => User)
   user: User;
 
-  @Column({type: "uuid"})
+  @Column({ type: "uuid" })
   specialistId: string;
 
   @ManyToOne(() => Specialist)
@@ -44,16 +41,13 @@ export class Task {
   @ManyToOne(() => Organization)
   organization: Organization;
 
-  @Column({ type: "uuid" })
-  notificationId: string;
-
   @ManyToOne(() => Notification)
   notification: Notification;
 
-  @Column({type: "varchar", length: 30})
+  @Column({ type: "varchar", length: 100 })
   name: string;
 
-  @Column({type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)"})
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
   due_date: Date;
 
   @Column({
@@ -63,10 +57,10 @@ export class Task {
   })
   status: TaskStatusEnum;
 
-  @Column({type: "int", nullable: true})
+  @Column({ type: "int", nullable: true })
   points: number;
 
-  @Column({type: "text", nullable: true})
+  @Column({ type: "text", nullable: true })
   description: string;
 
   @CreateDateColumn({

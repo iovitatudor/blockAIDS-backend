@@ -5,7 +5,6 @@ import { TaskStatusEnum } from "../enums/task-status.enum";
 import { UsersResource } from "../../users/resources/users.resource";
 import { SpecialistsResource } from "../../specialists/resources/specialists.resource";
 import { TaskTypeResource } from "./task-type.resource";
-import { NotificationsResource } from "../../notifications/resources/notifications.resource";
 
 @Injectable()
 export class TasksResource {
@@ -27,8 +26,6 @@ export class TasksResource {
   public specialist: SpecialistsResource;
   @ApiProperty({ example: TaskTypeResource })
   public taskType: TaskTypeResource;
-  @ApiProperty({ example: NotificationsResource })
-  public notification: NotificationsResource;
   @ApiProperty({ example: OrganizationResource })
   public organization: OrganizationResource;
   @ApiProperty({ example: 2 })
@@ -46,9 +43,6 @@ export class TasksResource {
       ? new SpecialistsResource(task.specialist)
       : null;
     this.taskType = task.taskType ? new TaskTypeResource(task.taskType) : null;
-    this.notification = task.notification
-      ? new NotificationsResource(task.notification)
-      : null;
     this.organization = task.organization
       ? new OrganizationResource(task.organization)
       : null;

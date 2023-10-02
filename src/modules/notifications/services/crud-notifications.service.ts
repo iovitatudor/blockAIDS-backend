@@ -4,6 +4,7 @@ import { Repository, UpdateResult } from "typeorm";
 import { CreateNotificationDto } from "../dto/create-notification.dto";
 import { UpdateNotificationDto } from "../dto/update-notification.dto";
 import { Notification } from "../entities/notification.entity";
+import { NotificationStatusEnum } from "../enums/notification-status.enum";
 
 @Injectable()
 export class CrudNotificationsService {
@@ -24,13 +25,73 @@ export class CrudNotificationsService {
   }
 
   findAll(): Promise<Notification[]> {
-    return this.notificationRepository.find();
+    return this.notificationRepository.find({
+      order: { id: "DESC" },
+      relations: {
+        task: true,
+        user: true,
+        specialist: true,
+      },
+    });
+  }
+
+  findAllByUserId(id: string): Promise<Notification[]> {
+    return this.notificationRepository.find({
+      where: { userId: id },
+      order: { id: "DESC" },
+      relations: {
+        task: true,
+        user: true,
+        specialist: true,
+      },
+    });
+  }
+
+  findAllBySpecialistId(id: string): Promise<Notification[]> {
+    return this.notificationRepository.find({
+      where: { specialistId: id },
+      order: { id: "DESC" },
+      relations: {
+        task: true,
+        user: true,
+        specialist: true,
+      },
+    });
+  }
+
+  findScheduledByUserId(id: string): Promise<Notification[]> {
+    return this.notificationRepository.find({
+      where: { userId: id, user_status: NotificationStatusEnum.scheduled },
+      order: { id: "DESC" },
+      relations: {
+        task: true,
+        user: true,
+        specialist: true,
+      },
+    });
+  }
+
+  findScheduledBySpecialistId(id: string): Promise<Notification[]> {
+    return this.notificationRepository.find({
+      where: { specialistId: id, specialist_status: NotificationStatusEnum.scheduled },
+      order: { id: "DESC" },
+      relations: {
+        task: true,
+        user: true,
+        specialist: true,
+      },
+    });
   }
 
   async findOne(id: number): Promise<Notification> {
     try {
       return await this.notificationRepository.findOneOrFail({
         where: { id },
+        relations: {
+          task: true,
+          user: true,
+          specialist: true,
+        },
       });
     } catch (e) {
       throw new HttpException(

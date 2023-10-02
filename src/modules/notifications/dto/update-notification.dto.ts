@@ -12,13 +12,13 @@ export class UpdateNotificationDto extends PartialType(CreateNotificationDto) {
   status: string;
 
   @ApiProperty({ example: "You've created a new task.", required: false })
-  @ValidateIf((o) => "status" in o)
+  @ValidateIf((o) => "user_message" in o)
   @IsNotEmpty()
   @IsString()
   user_message: string;
 
   @ApiProperty({ example: "John Doe has created a new task.", required: false })
-  @ValidateIf((o) => "status" in o)
+  @ValidateIf((o) => "specialist_message" in o)
   @IsNotEmpty()
   @IsString()
   specialist_message: string;

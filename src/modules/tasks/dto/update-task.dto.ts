@@ -36,12 +36,6 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
   @IsNotEmpty()
   organizationId: string;
 
-  @ApiProperty({ example: '1' })
-  @ValidateIf((o) => "notificationId" in o)
-  @IsString()
-  @IsNotEmpty()
-  notificationId: string;
-
   @ApiProperty({ example: "My first task" })
   @ValidateIf((o) => "name" in o)
   @IsString()

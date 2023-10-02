@@ -20,7 +20,7 @@ import { UpdateNotificationDto } from "./dto/update-Notification.dto";
 import { NotificationsResource } from "./resources/Notifications.resource";
 
 @ApiTags("Notifications")
-@Controller("notifications")
+@Controller("api/notifications")
 export class NotificationsController {
   constructor(
     private readonly crudNotificationsService: CrudNotificationsService,
@@ -31,8 +31,44 @@ export class NotificationsController {
   @ApiOperation({ summary: "Get all notifications" })
   @Get()
   async findAll() {
-    const Notifications = await this.crudNotificationsService.findAll();
-    return NotificationsResource.collect(Notifications);
+    const notifications = await this.crudNotificationsService.findAll();
+    return NotificationsResource.collect(notifications);
+  }
+
+  @ApiResponse({ status: 200, type: [NotificationsResource] })
+  @ApiOperation({ summary: "Get all by user id" })
+  @Get("/user/:id")
+  async findAllByUserId(@Param("id") id: string) {
+    const notifications =
+      await this.crudNotificationsService.findAllByUserId(id);
+    return NotificationsResource.collect(notifications);
+  }
+
+  @ApiResponse({ status: 200, type: [NotificationsResource] })
+  @ApiOperation({ summary: "Get all by specialist id" })
+  @Get("/specialist/:id")
+  async findAllBySpecialistId(@Param("id") id: string) {
+    const notifications =
+      await this.crudNotificationsService.findAllBySpecialistId(id);
+    return NotificationsResource.collect(notifications);
+  }
+
+  @ApiResponse({ status: 200, type: [NotificationsResource] })
+  @ApiOperation({ summary: "Get scheduled by user id" })
+  @Get("/user/:id/scheduled")
+  async findScheduledByUserId(@Param("id") id: string) {
+    const notifications =
+      await this.crudNotificationsService.findScheduledByUserId(id);
+    return NotificationsResource.collect(notifications);
+  }
+
+  @ApiResponse({ status: 200, type: [NotificationsResource] })
+  @ApiOperation({ summary: "Get scheduled by specialist id" })
+  @Get("/specialist/:id/scheduled")
+  async findScheduledBySpecialistId(@Param("id") id: string) {
+    const notifications =
+      await this.crudNotificationsService.findScheduledBySpecialistId(id);
+    return NotificationsResource.collect(notifications);
   }
 
   @ApiResponse({ status: 200, type: NotificationsResource })
