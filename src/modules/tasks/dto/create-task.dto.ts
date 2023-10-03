@@ -37,7 +37,7 @@ export class CreateTaskDto {
 
   @ApiProperty({ example: "1990-07-10", required: false })
   @IsDateString()
-  dateDue: Date | null;
+  due_date: Date | null;
 
   @ApiProperty({ example: TaskStatusEnum.InProgress, required: false })
   @IsString()
