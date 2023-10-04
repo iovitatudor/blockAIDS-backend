@@ -10,7 +10,7 @@ export class Notification {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Task)
+  @ManyToOne(() => Task, { onDelete: "CASCADE" })
   task: Task;
 
   @Column({ type: "uuid" })
