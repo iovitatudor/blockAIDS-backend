@@ -34,6 +34,15 @@ export class CreateUserDto {
   @IsNotEmpty()
   phone: string;
 
+  @ApiProperty({
+    example: "2gCr6A9bk7rfXqwwBsW1PB63Yh19perTjH7y5yvKCYHN",
+    required: false,
+  })
+  @ValidateIf((o) => "public_key" in o)
+  @IsString()
+  @IsNotEmpty()
+  public_key: string;
+
   @ApiProperty({ example: "1990-07-10", required: false })
   @ValidateIf((o) => "birthdate" in o)
   @IsOptional()

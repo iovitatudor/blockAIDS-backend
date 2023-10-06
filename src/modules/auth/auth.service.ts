@@ -70,6 +70,7 @@ export class AuthService {
           name: registerAuthDto.name,
           email: registerAuthDto.email,
           password: registerAuthDto.password,
+          public_key: null,
           phone: null,
           birthdate: null,
           avatar: "avatar-mock.png",

@@ -12,6 +12,8 @@ export class UsersResource {
   public email: string;
   @ApiProperty({ example: "+3736091232" })
   public phone: string;
+  @ApiProperty({ example: "2gCr6A9bk7rfXqwwBsW1PB63Yh19perTjH7y5yvKCYHN" })
+  public public_key: string;
   @ApiProperty({ example: "johny-avatar.png" })
   public avatar: string;
   @ApiProperty({ example: UserGenderEnum.male })
@@ -24,6 +26,7 @@ export class UsersResource {
     this.name = user.name;
     this.email = user.email;
     this.phone = user.phone;
+    this.public_key = user.public_key;
     this.avatar = user.avatar;
     this.gender = user.gender;
     this.birthdate = user.birthdate;
