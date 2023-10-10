@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, UpdateResult } from "typeorm";
-import { CreateSpecialistDto } from "../dto/create-Specialist.dto";
-import { UpdateSpecialistDto } from "../dto/update-Specialist.dto";
-import { Specialist } from "../entities/Specialist.entity";
+import { CreateSpecialistDto } from "../dto/create-specialist.dto";
+import { UpdateSpecialistDto } from "../dto/update-specialist.dto";
+import { Specialist } from "../entities/specialist.entity";
 import { FilesService } from "../../../common/files/files.service";
 import * as bcrypt from "bcryptjs";
 
