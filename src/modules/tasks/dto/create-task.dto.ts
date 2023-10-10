@@ -11,7 +11,7 @@ import { TaskStatusEnum } from "../enums/task-status.enum";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateTaskDto {
-  @ApiProperty({ example: '1' })
+  @ApiProperty({ example: "1" })
   @IsNotEmpty()
   userId: string;
 
@@ -19,12 +19,12 @@ export class CreateTaskDto {
   @IsNotEmpty()
   specialistId: string;
 
-  @ApiProperty({ example: '1' })
+  @ApiProperty({ example: "1" })
   @IsString()
   @IsNotEmpty()
   taskTypeId: string;
 
-  @ApiProperty({ example: '1' })
+  @ApiProperty({ example: "1" })
   @IsString()
   @IsNotEmpty()
   organizationId: string;
@@ -48,6 +48,12 @@ export class CreateTaskDto {
   @IsNumber()
   @IsNotEmpty()
   points: number;
+
+  @ApiProperty({ example: "33mhhyFW4KHXjbL1KrbPEBPb43QiXdBndzbeMJafGiiwgR4v3y6d6vM4TkMw7aLtoTLz4jez37Qs1PeyeRynWpaX" })
+  @ValidateIf((o) => "pay_signature" in o)
+  @IsString()
+  @IsNotEmpty()
+  pay_signature: string;
 
   @ApiProperty({ example: "Task description...." })
   @IsString()

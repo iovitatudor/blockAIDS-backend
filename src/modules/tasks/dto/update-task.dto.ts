@@ -60,6 +60,12 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
   @IsNotEmpty()
   points: number;
 
+  @ApiProperty({ example: "33mhhyFW4KHXjbL1KrbPEBPb43QiXdBndzbeMJafGiiwgR4v3y6d6vM4TkMw7aLtoTLz4jez37Qs1PeyeRynWpaX" })
+  @ValidateIf((o) => "pay_signature" in o)
+  @IsString()
+  @IsNotEmpty()
+  pay_signature: string;
+
   @ApiProperty({ example: "Task description...." })
   @ValidateIf((o) => "description" in o)
   @IsString()

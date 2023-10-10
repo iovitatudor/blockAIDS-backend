@@ -60,6 +60,9 @@ export class Task {
   @Column({ type: "int", nullable: true })
   points: number;
 
+  @Column({ type: "varchar", nullable: true })
+  pay_signature: string;
+
   @Column({ type: "text", nullable: true })
   description: string;
 

@@ -18,6 +18,8 @@ export class TasksResource {
   public status: TaskStatusEnum;
   @ApiProperty({ example: 342 })
   public points: number;
+  @ApiProperty({ example: "33mhhyFW4KHXjbL1KrbPEBPb43QiXdBndzbeMJafGiiwgR4v3y6d6vM4TkMw7aLtoTLz4jez37Qs1PeyeRynWpaX" })
+  public pay_signature: string;
   @ApiProperty({ example: "My first task description" })
   public description: string;
   @ApiProperty({ example: UsersResource })
@@ -37,6 +39,7 @@ export class TasksResource {
     this.dateDue = task.due_date;
     this.status = task.status;
     this.points = task.points;
+    this.pay_signature = task.pay_signature;
     this.description = task.description;
     this.user = task.user ? new UsersResource(task.user) : null;
     this.specialist = task.specialist
