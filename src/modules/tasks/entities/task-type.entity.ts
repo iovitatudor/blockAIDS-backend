@@ -6,7 +6,7 @@ export class TaskType {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "varchar", length: 100 })
+  @Column({ type: "varchar", length: 30 })
   name: string;
 
   @Column({ type: "text", nullable: true })
