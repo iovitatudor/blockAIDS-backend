@@ -18,7 +18,6 @@ export class BlockchainController {
   async transfer(@Body() transferData: TransferSolanaDto) {
     const transferResponse =
       await this.solanaService.transferCustomToken(transferData);
-    return transferResponse
     return new TransferResource(transferResponse);
   }
 }

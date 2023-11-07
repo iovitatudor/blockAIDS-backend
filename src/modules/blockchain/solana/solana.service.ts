@@ -15,7 +15,7 @@ const tokenToDecimal = {
 export class SolanaService {
   async transferCustomToken(transferData: TransferSolanaDto) {
     try {
-      const connection = new Connection(clusterApiUrl("testnet"), "confirmed");
+      const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
       const senderPrivateKeyString = process.env.WALLET_SECRET_KEY;
       const senderPrivateKey = bs58.decode(senderPrivateKeyString);
       const fromWallet = Keypair.fromSecretKey(senderPrivateKey);
