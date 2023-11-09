@@ -16,6 +16,8 @@ export class UsersResource {
   public public_key: string;
   @ApiProperty({ example: "johny-avatar.png" })
   public avatar: string;
+  @ApiProperty({ example: "https://avatars.githubusercontent.com/u/36919907" })
+  public avatar_link: string;
   @ApiProperty({ example: UserGenderEnum.male })
   public gender: string;
   @ApiProperty({ example: "1990-07-10" })
@@ -28,6 +30,7 @@ export class UsersResource {
     this.phone = user.phone;
     this.public_key = user.public_key;
     this.avatar = user.avatar;
+    this.avatar_link = user.avatar_link;
     this.gender = user.gender;
     this.birthdate = user.birthdate;
   }

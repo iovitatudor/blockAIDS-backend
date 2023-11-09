@@ -8,7 +8,7 @@ import {
   Delete,
   HttpCode,
   UseInterceptors,
-  UploadedFile,
+  UploadedFile, Query, Put,
 } from "@nestjs/common";
 import {
   ApiConsumes,
@@ -36,8 +36,8 @@ export class UsersController {
   @ApiResponse({ status: 200, type: [UsersResource] })
   @ApiOperation({ summary: "Get all users" })
   @Get()
-  async findAll() {
-    const users = await this.crudUsersService.findAllUser();
+  async findAll(@Query() query) {
+    const users = await this.crudUsersService.findAllUser(query.page);
     return UsersResource.collect(users);
   }
 
@@ -58,6 +58,15 @@ export class UsersController {
     await this.validationUsersService.validateEmail(createUserDto.email);
     const user = await this.crudUsersService.createUser(createUserDto, avatar);
     return new UsersResource(user);
+  }
+
+  @ApiResponse({ status: 200, type: UsersResource })
+  @ApiOperation({ summary: "Update user public key" })
+  @Post("public-key")
+  async updatePublicKey(@Body() updateUserDto: UpdateUserDto) {
+    return await this.crudUsersService.updateUserPublicKey(
+      updateUserDto,
+    );
   }
 
   @ApiConsumes("multipart/form-data")

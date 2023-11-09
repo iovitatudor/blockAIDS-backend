@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository, UpdateResult } from "typeorm";
+import { IsNull, Repository, UpdateResult } from "typeorm";
 import { CreateUserDto } from "../dto/create-user.dto";
 import { UpdateUserDto } from "../dto/update-user.dto";
 import { User } from "../entities/user.entity";
@@ -25,8 +25,13 @@ export class CrudUsersService {
     return this.userRepository.save(createUserDto);
   }
 
-  findAllUser(): Promise<User[]> {
+  findAllUser(page: number = 1): Promise<User[]> {
+    const take: number = 1000;
+    const skip: number = (take * page) - 1000;
+
     return this.userRepository.find({
+      take: take,
+      skip: skip,
       order: {
         id: "DESC",
       },
@@ -66,6 +71,20 @@ export class CrudUsersService {
       updateUserDto.password = await bcrypt.hash(updateUserDto.password, 5);
     }
     return await this.userRepository.update(id, updateUserDto);
+  }
+
+  async updateUserPublicKey(
+    updateUserDto: UpdateUserDto,
+  ): Promise<UpdateResult> {
+    const user = await this.userRepository.findOne({
+      where: {
+        public_key: IsNull(),
+      },
+    });
+    return await this.userRepository.update(
+      { id: user.id },
+      { public_key: updateUserDto.public_key },
+    );
   }
 
   removeUser(id: number): Promise<{ affected?: number }> {

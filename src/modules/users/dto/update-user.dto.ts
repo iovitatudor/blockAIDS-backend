@@ -13,7 +13,7 @@ import { UserGenderEnum } from "../enums/user-gender.enum";
 import { ApiProperty } from "@nestjs/swagger";
 
 const passwordRegEx =
-  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d][A-Za-z\d@$!%*#?&_]{8,}$/;
 
 export class UpdateUserDto {
   @ApiProperty({ example: "John Smith", required: false })
@@ -61,6 +61,15 @@ export class UpdateUserDto {
   @IsOptional()
   @IsString()
   avatar: string;
+
+  @ApiProperty({
+    example: "https://avatars.githubusercontent.com/u/36919907",
+    required: false,
+  })
+  @ValidateIf((o) => "avatar_link" in o)
+  @IsString()
+  @IsOptional()
+  avatar_link: string;
 
   @ApiProperty({ example: "qwerQWER1234%$", required: false })
   @ValidateIf((o) => "password" in o)

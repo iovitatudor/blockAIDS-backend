@@ -10,9 +10,8 @@ import {
 import { ApiProperty, PartialType } from "@nestjs/swagger";
 import { CreateSpecialistDto } from "./create-specialist.dto";
 
-
 const passwordRegEx =
-  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d][A-Za-z\d@$!%*#?&_]{8,}$/;
 
 export class UpdateSpecialistDto extends PartialType(CreateSpecialistDto) {
   @ApiProperty({ example: 1 })

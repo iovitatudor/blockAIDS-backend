@@ -11,7 +11,7 @@ import {
 import { ApiProperty } from "@nestjs/swagger";
 
 const passwordRegEx =
-  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d][A-Za-z\d@$!%*#?&_]{8,}$/;
 
 export class CreateSpecialistDto {
   @ApiProperty({ example: 1 })

@@ -35,6 +35,13 @@ export class User {
   @Column({ type: "varchar", length: 255, default: "avatar-mock.png" })
   avatar: string;
 
+  @Column({
+    type: "varchar",
+    length: 255,
+    default: "https://avatars.githubusercontent.com/u/36919907",
+  })
+  avatar_link: string;
+
   @CreateDateColumn({
     type: "timestamp",
     default: () => "CURRENT_TIMESTAMP(6)",

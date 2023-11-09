@@ -74,6 +74,7 @@ export class AuthService {
           phone: null,
           birthdate: null,
           avatar: "avatar-mock.png",
+          avatar_link: "https://avatars.githubusercontent.com/u/36919907",
           gender: UserGenderEnum.other,
         },
         null,

@@ -14,7 +14,7 @@ import { UserGenderEnum } from "../enums/user-gender.enum";
 import { ApiProperty } from "@nestjs/swagger";
 
 const passwordRegEx =
-  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d][A-Za-z\d@$!%*#?&_]{8,}$/;
 
 export class CreateUserDto {
   @ApiProperty({ example: "John Smith" })
@@ -63,14 +63,22 @@ export class CreateUserDto {
   @IsOptional()
   avatar: string;
 
+  @ApiProperty({
+    example: "https://avatars.githubusercontent.com/u/36919907",
+    required: false,
+  })
+  @ValidateIf((o) => "avatar_link" in o)
+  @IsString()
+  @IsOptional()
+  avatar_link: string;
+
   @ApiProperty({ example: "qwerQWER1234%$" })
   @IsNotEmpty()
   @Matches(passwordRegEx, {
-    message: `Password must contain Minimum 8 and maximum 20 characters, 
-    at least one uppercase letter, 
-    one lowercase letter, 
-    one number and 
-    one special character`,
+    message: `Password must contain Minimum 8 and maximum 20 characters,
+    at least one uppercase letter,
+    one lowercase letter,
+    one number`,
   })
   password: string;
 }
