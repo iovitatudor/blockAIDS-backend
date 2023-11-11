@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
+import { OrganizationResource } from "../../organizations/resources/organization.resource";
 
 @Injectable()
 export class SpecialistsResource {
@@ -15,6 +16,8 @@ export class SpecialistsResource {
   public avatar: string;
   @ApiProperty({ example: 1 })
   public organizationId: number;
+  @ApiProperty({ example: 1 })
+  public organization: OrganizationResource;
 
   public constructor(specialist) {
     this.id = specialist.id;
@@ -23,6 +26,9 @@ export class SpecialistsResource {
     this.jobPosition = specialist.job_position;
     this.avatar = specialist.avatar;
     this.organizationId = specialist.organizationId;
+    this.organization = this.organization
+      ? new OrganizationResource(specialist.organization)
+      : null;
   }
 
   public static collect(specialists): SpecialistsResource[] {
